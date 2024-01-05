@@ -2,18 +2,24 @@ import './App.css';
 import Todo from './components/Todo';
 import { Form } from './components/Form';
 import { useState } from 'react';
+import {v4 as uuidv4} from 'uuid';
 
 function App() {
   const [todos,setTodos] = useState([]);
 
-  const addTodo = (todo)=>{
-    setTodos([...todos,todo]);
+  const addTodo = (task)=>{
+    setTodos([...todos,{todo:task,id:uuidv4()}])
   }
+
+  const deleteHandle = (id) =>{
+    setTodos(todos.filter((todo)=>todo.id !== id))
+  }
+
   return (
-    <div className="d-flex flex-column justify-content-center align-item-center p-2 bg-black">
+    <div className="container">
       <Form addTodo={addTodo}/>
-      {todos.map((todo,index)=>(
-        <Todo todo={todo} key={index}/>
+      {todos.map((todo)=>(
+        <Todo todo={todo} key={todo.id} deleteHandle={deleteHandle}/>
       ))}
     </div>
   );

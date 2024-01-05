@@ -11,9 +11,12 @@ export const Form = ({addTodo}) => {
     setValue("");
   }
   return (
-    <form onSubmit={handle}>
-        <input type='text' placeholder='What to do' value={value} onChange={(e)=>setValue(e.target.value)}/>
-        <button type='submit'>Submit</button>
-    </form>
+        <form onSubmit={handle}>
+            <div  className='d-flex flex-column form-group'>
+                <label className='h1'>Task</label>
+                <input type='text' className='form-control' placeholder='What to do' value={value} onChange={(e)=>setValue(e.target.value)}/>
+            </div>
+                <button type='submit' className='btn btn-primary '>Submit</button>
+        </form>
   )
 }
